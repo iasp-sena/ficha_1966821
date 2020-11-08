@@ -7,22 +7,19 @@ $obj->$nombrePropiedad;
 $obj->apellido;
 */
 
-
-$nombreControlador = $_GET["controller"];
-$nombreMetodo = $_GET["method"];
+$nombreControlador = $_GET["controller"] ?? $_POST["controller"];
+$nombreMetodo = $_GET["method"] ?? $_POST["method"];
 if($nombreControlador){
     $nombreControlador .= "Controller";
-    $rutaArchivoControlador = "./controlador/".$nombreControlador.".php";
+    
+    $controlador = new $nombreControlador();
 
-    if(file_exists($rutaArchivoControlador)){
-        require_once($rutaArchivoControlador);
-    
-        $controlador = new $nombreControlador();
-    
-        $controlador->saludar();
+    if(method_exists($controlador, $nombreMetodo)){
+        $controlador->$nombreMetodo();
     } else{
-        echo "error controlador no existe..";
+        echo "La función solicitada no existe";
     }
+
 } else{
     echo "error no a estipulado el controlador...";
 }
