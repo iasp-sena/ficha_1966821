@@ -11,3 +11,4 @@ define("DIR_SERVICE",DOCUMENT_ROOT."/servicios/");
 
 
 require_once("autoloads.php");
+require_once("funciones.php");

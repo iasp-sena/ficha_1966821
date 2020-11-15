@@ -6,9 +6,8 @@ $obj = new Usuario();
 $obj->$nombrePropiedad;
 $obj->apellido;
 */
-
-$nombreControlador = $_GET["controller"] ?? $_POST["controller"];
-$nombreMetodo = $_GET["method"] ?? $_POST["method"];
+$nombreControlador = $_GET["controller"];
+$nombreMetodo = $_GET["method"];
 if($nombreControlador){
     $nombreControlador .= "Controller";
     

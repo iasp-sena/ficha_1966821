@@ -23,11 +23,22 @@ function autoloadServicios($nombreServicio){
     //echo("Ruta: $rutaArchivoSerivio <br/>");
     if(file_exists($rutaArchivoSerivio)){
         require_once($rutaArchivoSerivio);
+    } 
+}
+
+
+function autoloadVista($nombreClaseVista){
+    $rutaArchivoVista = DIR_VIEW . $nombreClaseVista . ".php";
+    //echo("Vamos a cargar el modelo automáticamente... $nombreClaseVista <br/>");
+    //echo("Ruta: $rutaArchivoSerivio <br/>");
+    if(file_exists($rutaArchivoVista)){
+        require_once($rutaArchivoVista);
     } else{
-        die("Error al cargar el servicio $nombreServicio");
+        die("Error al cargar el servicio $nombreClaseVista");
     }
 }
 
 spl_autoload_register("autoloadControllers");
 spl_autoload_register("autoloadModelo");
 spl_autoload_register("autoloadServicios");
+spl_autoload_register("autoloadVista");
