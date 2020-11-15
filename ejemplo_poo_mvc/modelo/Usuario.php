@@ -3,9 +3,12 @@
 class Usuario {
 
     private $id;
+    private $tipoDocumento;
+    private $numeroDocumento;
     private $nombres;
     private $apellidos;
     private $nombreUsuario;
+    private $clave;
 
     public function getId(){
         return $this->id;
@@ -13,6 +16,22 @@ class Usuario {
 
     public function setId($id){
         $this->id = $id;
+    }
+
+    public function getTipoDocumento(){
+        return $this->tipoDocumento;
+    }
+
+    public function setTipoDocumento($tipoDocumento){
+        $this->tipoDocumento = $tipoDocumento;
+    }
+
+    public function getNumeroDocumento(){
+        return $this->numeroDocumento;
+    }
+
+    public function setNumeroDocumento($numeroDocumento){
+        $this->numeroDocumento = $numeroDocumento;
     }
 
     public function getNombres(){
@@ -37,6 +56,14 @@ class Usuario {
 
     public function setNombreUsuario($nombreUsuario){
         $this->nombreUsuario = $nombreUsuario;
+    }
+
+    public function getClave(){
+        return $this->clave;
+    }
+
+    public function setClave($clave){
+        $this->clave = $clave;
     }
 
 }

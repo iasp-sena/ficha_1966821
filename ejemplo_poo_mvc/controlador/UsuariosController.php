@@ -28,8 +28,12 @@ class UsuariosController {
 
     public function registrar(){
         $nuevoUsuario = new Usuario();
+        $nuevoUsuario->setTipoDocumento($_POST["tipoDocumento"]);
+        $nuevoUsuario->setNumeroDocumento($_POST["numeroDocumento"]);
         $nuevoUsuario->setNombres($_POST["nombres"]);
         $nuevoUsuario->setApellidos($_POST["apellidos"]);
+        $nuevoUsuario->setNombreUsuario($_POST["nombreUsuario"]);
+        $nuevoUsuario->setClave($_POST["clave"]);
 
         $mensaje = self::$usuariosServicios->registrarUsuario($nuevoUsuario);
         
