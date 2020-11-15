@@ -5,6 +5,7 @@ class Usuario {
     private $id;
     private $nombres;
     private $apellidos;
+    private $nombreUsuario;
 
     public function getId(){
         return $this->id;
@@ -28,6 +29,14 @@ class Usuario {
 
     public function setApellidos($apellidos){
         $this->apellidos = $apellidos;
+    }
+
+    public function getNombreUsuario(){
+        return $this->nombreUsuario;
+    }
+
+    public function setNombreUsuario($nombreUsuario){
+        $this->nombreUsuario = $nombreUsuario;
     }
 
 }

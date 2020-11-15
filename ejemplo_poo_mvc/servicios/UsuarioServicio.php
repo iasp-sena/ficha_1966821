@@ -3,20 +3,24 @@
 class UsuarioServicio {
 
     public function consultarUsuarios(){
-
-        $miUsuario = new Usuario();
-        $miUsuario->setId(1); 
-        $miUsuario->setNombres("Carlos");
-        $miUsuario->setApellidos("Ramirez");
-
-        $miUsuario2 = new Usuario();
-        $miUsuario2->setId(2); 
-        $miUsuario2->setNombres("Daniela");
-        $miUsuario2->setApellidos("Gómez");
-
         $usuarios = [];
-        array_push($usuarios, $miUsuario);
-        array_push($usuarios, $miUsuario2);
+        $pdo = ConexionBD::getPDO();
+
+        $stm = $pdo->prepare("SELECT * FROM tbl_usuarios");
+        //$stm->setFetchMode(PDO::FETCH_CLASS,'Usuario');
+        if($stm->execute()){
+            while($fila = $stm->fetch(PDO::FETCH_OBJ)){
+                array_push($usuarios, $this->toUsuario($fila));
+                
+                //print_r($this->toUsuario($fila));
+                //echo "<br/>...... ".$fila->nombres." ......<br/>";
+
+                //print_r($fila);
+                //echo "<br/>...... ".$fila["nombres"]." ......<br/>";
+                //echo "<br/>...... ".$fila->getNombres()." ......<br/>";
+            }
+        }
+
 
         return $usuarios;
     }
@@ -25,5 +29,16 @@ class UsuarioServicio {
         echo("Registramos el usuario....");
         var_dump($usuario);
         return "Se ha registrado el usuario correctamente.";
+    }
+
+
+    private function toUsuario($datosUsuario){
+        $usuario = new Usuario();
+        $usuario->setId($datosUsuario->id);
+        $usuario->setNombres($datosUsuario->nombres);
+        $usuario->setApellidos($datosUsuario->apellidos);
+        $usuario->setNombreUsuario($datosUsuario->nombre_usuario);
+
+        return $usuario;
     }
 }
