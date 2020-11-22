@@ -9,14 +9,16 @@ $obj->apellido;
 $nombreControlador = $_GET["controller"];
 $nombreMetodo = $_GET["method"];
 if($nombreControlador){
-    $nombreControlador .= "Controller";
+    if(Session::puedeAcceder($nombreControlador, $nombreMetodo)){
+        $nombreControlador .= "Controller";
+        
+        $controlador = new $nombreControlador();
     
-    $controlador = new $nombreControlador();
-
-    if(method_exists($controlador, $nombreMetodo)){
-        $controlador->$nombreMetodo();
-    } else{
-        echo "La función solicitada no existe";
+        if(method_exists($controlador, $nombreMetodo)){
+            $controlador->$nombreMetodo();
+        } else{
+            echo "La función solicitada no existe";
+        }
     }
 
 } else{

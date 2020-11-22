@@ -6,9 +6,9 @@
                 <label for="tipoDocumento">Tipo de documento</label>
                 <select class="custom-select" name="tipoDocumento">
                     <option selected>Seleccione una opción...</option>
-                    <option value="1">CC</option>
-                    <option value="2">CE</option>
-                    <option value="3">TI</option>
+                    <?php foreach($data["tiposDocumentos"] as $td){ ?>
+                    <option value="<?= $td->getId() ?>"><?= $td->getDescripcion() ?></option>
+                    <?php } ?>
                 </select>
             </div>
         </div>

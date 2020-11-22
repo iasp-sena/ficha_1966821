@@ -3,10 +3,12 @@
 class UsuariosController {
 
     private static $usuariosServicios;
+    private static $tdServicio;
     private static $template;
 
     public function __construct(){
         self::$usuariosServicios = new UsuarioServicio();
+        self::$tdServicio = new TipoDocumentoServicio();
         self::$template = new Template();
     }
 
@@ -20,9 +22,13 @@ class UsuariosController {
     }
 
     public function registro(){
+        $tiposDocs = self::$tdServicio->consultarTodos();
+
         self::$template->render(
             DIR_VIEW."usuarios/registro.php",
-            ["titulo"=>"Regirtro usuario nuevo"]
+            ["titulo"=>"Registro usuario nuevo",
+            "tiposDocumentos"=>$tiposDocs
+            ]
         );
     }
 
@@ -40,7 +46,7 @@ class UsuariosController {
         //include(DIR_VIEW."/usuarios/registro_exitoso.php");
         self::$template->render(
             DIR_VIEW."usuarios/registro.php",
-            ["titulo"=>"Regirtro usuario nuevo", "mensaje"=>$mensaje]
+            ["titulo"=>"Registro usuario nuevo", "mensaje"=>$mensaje]
         );
     }
 }

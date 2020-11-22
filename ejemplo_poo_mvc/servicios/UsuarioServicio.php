@@ -2,11 +2,28 @@
 
 class UsuarioServicio {
 
+    public function consultarPorUsuarioYClave($nombreUsuario, $clave){
+        $usuario = null;
+        $pdo = ConexionBD::getPDO();
+
+        $stm = $pdo->prepare("SELECT u.*, td.codigo as td_codigo, td.descripcion as td_descripcion FROM tbl_usuarios u INNER JOIN tbl_tipos_documentos td ON u.tipo_documento_id = td.id WHERE u.nombre_usuario = :username AND u.clave = MD5(:passw)");
+        $stm->bindValue(":username", $nombreUsuario);
+        $stm->bindValue(":passw", $clave);
+        if($stm->execute()){
+            if($fila = $stm->fetch(PDO::FETCH_OBJ)){
+                $usuario = $this->toUsuario($fila);
+            }
+        }
+
+
+        return $usuario;
+    }
+
     public function consultarUsuarios(){
         $usuarios = [];
         $pdo = ConexionBD::getPDO();
 
-        $stm = $pdo->prepare("SELECT u.*, td.codigo as td_codigo, td.descripcion as td_descripcion FROM tbl_usuarios u INNER JOIN tbl_tipos_documentos td ON u.tipo_documento_id = td.id");
+        $stm = $pdo->prepare("SELECT u.*, td.codigo as td_codigo, td.descripcion as td_descripcion FROM tbl_usuarios u INNER JOIN tbl_tipos_documentos td ON u.tipo_documento_id = td.id ORDER BY u.id DESC");
         //$stm->setFetchMode(PDO::FETCH_CLASS,'Usuario');
         if($stm->execute()){
             while($fila = $stm->fetch(PDO::FETCH_OBJ)){

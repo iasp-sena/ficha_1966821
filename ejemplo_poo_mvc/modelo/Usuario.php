@@ -66,4 +66,8 @@ class Usuario {
         $this->clave = $clave;
     }
 
+    public function getNombreCompleto(){
+        return $this->nombres . " " . $this->apellidos;
+    }
+
 }

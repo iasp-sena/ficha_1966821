@@ -33,8 +33,15 @@ function autoloadVista($nombreClaseVista){
     //echo("Ruta: $rutaArchivoSerivio <br/>");
     if(file_exists($rutaArchivoVista)){
         require_once($rutaArchivoVista);
+    }
+}
+
+function autoloadUtils($nombreClase){
+    $rutaArchivo = DIR_UTILS . $nombreClase . ".php";
+    if(file_exists($rutaArchivo)){
+        require_once($rutaArchivo);
     } else{
-        die("Error al cargar el servicio $nombreClaseVista");
+        die("Error al cargar el servicio $nombreClase");
     }
 }
 
@@ -42,3 +49,4 @@ spl_autoload_register("autoloadControllers");
 spl_autoload_register("autoloadModelo");
 spl_autoload_register("autoloadServicios");
 spl_autoload_register("autoloadVista");
+spl_autoload_register("autoloadUtils");

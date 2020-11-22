@@ -10,10 +10,10 @@
         <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="subMenuUsuario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Usuarios
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="subMenuUsuario">
           <a class="dropdown-item" href="<?= getUrlControllerMethod("Usuarios","listar") ?>">Listar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<?= getUrlControllerMethod("Usuarios","registro") ?>">Registro</a>
@@ -21,6 +21,16 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Productos</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="subMenuPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <?= Session::getUser()->getNombreCompleto() ?>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="subMenuPerfil">
+          <a class="dropdown-item" href="<?= getUrlControllerMethod("Login","salir") ?>">Cerrar sesión</a>
+        </div>
       </li>
     </ul>
   </div>
